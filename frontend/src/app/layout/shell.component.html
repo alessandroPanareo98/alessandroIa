@@ -1,0 +1,37 @@
+<mat-sidenav-container class="shell-container">
+  <mat-sidenav mode="side" opened class="side-nav">
+    <div class="brand">
+      <div class="dot"></div>
+      <div>
+        <div class="brand-title">AI DevOps</div>
+        <div class="brand-subtitle">Assistant</div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      @for (item of links; track item.route) {
+        <a
+          mat-button
+          class="menu-item"
+          [routerLink]="item.route"
+          routerLinkActive="menu-item-active"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="top-bar">
+      <span>DevOps Control Center</span>
+      <span class="toolbar-spacer"></span>
+      <button mat-stroked-button>Live</button>
+    </mat-toolbar>
+
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

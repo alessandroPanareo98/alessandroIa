@@ -1,0 +1,435 @@
+Struttura del repository
+ai-devops-assistant/
+│
+├── .devcontainer/
+│   ├── backend/
+│   ├── frontend/
+│   ├── ai-server/
+│   └── docker-compose.dev.yml
+│
+├── .github/
+│   └── workflows/
+│
+├── backend/
+│
+├── frontend/
+│
+├── ai-server/
+│
+├── database/
+│   ├── migrations/
+│   ├── init/
+│   └── backups/
+│
+├── docker/
+│   ├── backend/
+│   ├── frontend/
+│   ├── postgres/
+│   ├── ollama/
+│   └── nginx/
+│
+├── scripts/
+│
+├── docs/
+│
+├── postman/
+│
+├── .vscode/
+│
+├── docker-compose.yml
+│
+├── docker-compose.dev.yml
+│
+├── .env.example
+│
+├── README.md
+│
+└── LICENSE
+Backend
+backend/
+
+src/
+
+src/main/
+
+src/test/
+
+pom.xml
+
+Dockerfile
+
+application.yml
+
+application-dev.yml
+
+application-prod.yml
+
+README.md
+Frontend
+frontend/
+
+src/
+
+angular.json
+
+package.json
+
+Dockerfile
+
+README.md
+AI Server
+ai-server/
+
+models/
+
+prompts/
+
+config/
+
+logs/
+
+Dockerfile
+
+requirements.txt
+
+README.md
+Database
+database/
+
+migrations/
+
+init/
+
+seed/
+
+backup/
+
+README.md
+Docker
+docker/
+
+backend/
+
+frontend/
+
+postgres/
+
+ollama/
+
+nginx/
+
+Ogni cartella contiene:
+
+Dockerfile
+
+config
+
+script
+Scripts
+scripts/
+
+start-dev.sh
+
+start-prod.sh
+
+stop.sh
+
+reset-db.sh
+
+download-model.sh
+
+backup-db.sh
+
+restore-db.sh
+
+logs.sh
+Documentazione
+docs/
+
+Architecture.md
+
+Installation.md
+
+Development.md
+
+Deployment.md
+
+API.md
+
+AI.md
+
+Database.md
+
+GitLab.md
+
+Troubleshooting.md
+Workspace VS Code
+.vscode/
+
+extensions.json
+
+launch.json
+
+settings.json
+
+tasks.json
+Dev Containers
+
+Ogni componente dispone del proprio Dev Container.
+
+.devcontainer/
+
+backend/
+
+frontend/
+
+ai-server/
+Backend DevContainer
+
+Contiene
+
+Java 21
+
+Maven
+
+Git
+
+Docker CLI
+
+Docker Compose
+
+GitHub CLI
+
+Spring Boot Extension Pack
+
+Debugger
+
+Test Runner
+Frontend DevContainer
+
+Contiene
+
+Node LTS
+
+Angular CLI
+
+npm
+
+Git
+
+Docker CLI
+
+ESLint
+
+Prettier
+
+Chrome Debugger
+AI Server DevContainer
+
+Contiene
+
+Python
+
+pip
+
+venv
+
+Ollama CLI
+
+curl
+
+git
+
+Jupyter (opzionale)
+Docker Compose
+
+Servizi previsti
+
+Frontend
+
+↓
+
+Backend
+
+↓
+
+PostgreSQL
+
+↓
+
+PgAdmin
+
+↓
+
+Ollama
+
+↓
+
+Nginx
+Porte
+Servizio	Porta
+Frontend	4200
+Backend	8080
+PostgreSQL	5432
+PgAdmin	5050
+Ollama API	11434
+Nginx	80
+Variabili d'ambiente
+POSTGRES_USER
+
+POSTGRES_PASSWORD
+
+POSTGRES_DB
+
+JWT_SECRET
+
+OLLAMA_URL
+
+OLLAMA_MODEL
+
+GITLAB_URL
+
+GITLAB_TOKEN
+
+SPRING_PROFILES_ACTIVE
+Branch Git
+main
+
+develop
+
+feature/*
+
+bugfix/*
+
+release/*
+
+hotfix/*
+README principale
+
+Il repository conterrà:
+
+Introduzione
+
+Architettura
+
+Installazione
+
+Prerequisiti
+
+Docker
+
+Dev Container
+
+Configurazione
+
+Avvio
+
+Build
+
+Testing
+
+Deploy
+
+Troubleshooting
+Flusso di sviluppo
+Clone Repository
+
+↓
+
+Apri VS Code
+
+↓
+
+Reopen in Dev Container
+
+↓
+
+Docker Compose avvia:
+
+Backend
+
+Frontend
+
+Database
+
+Ollama
+
+↓
+
+Angular Live Reload
+
+↓
+
+Spring DevTools
+
+↓
+
+Hot Reload AI Server
+Flusso di produzione
+Git Push
+
+↓
+
+GitLab CI
+
+↓
+
+Build
+
+↓
+
+Test
+
+↓
+
+Docker Image
+
+↓
+
+Deploy
+
+↓
+
+Server
+
+↓
+
+Monitoraggio
+Tecnologie adottate
+Backend
+Java 21
+Spring Boot 3
+Spring Security
+Spring Data JPA
+PostgreSQL
+Flyway
+JWT
+Swagger/OpenAPI
+Maven
+Frontend
+Angular 20
+Angular Material
+RxJS
+Signals
+Chart.js
+SCSS
+AI
+Ollama
+Qwen 3 (modello predefinito)
+API compatibili OpenAI
+Infrastruttura
+Docker
+Docker Compose
+Dev Containers
+Nginx
+GitLab CI/CD
+Suggerimento architetturale
+
+Ti consiglio una piccola evoluzione rispetto al piano iniziale: invece di mettere il modello AI direttamente nel backend, crea un servizio AI dedicato (ai-server). In questo modo:
+
+🔄 potrai cambiare modello (Qwen, Llama, DeepSeek) senza toccare il backend;
+📈 sarà più semplice scalare il servizio AI separatamente;
+🧪 potrai testare e aggiornare il modello in modo indipendente;
+☁️ in futuro potrai spostare l'AI su un server con GPU lasciando invariato il resto dell'applicazione.
+
+Questa separazione rende il progetto molto più vicino a un'architettura enterprise e ti eviterà refactoring importanti quando crescerà.

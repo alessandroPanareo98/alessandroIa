@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-alt: #eef2f9;
+  --text: #1b2430;
+  --muted: #5b6574;
+  --accent: #0e7490;
+  --accent-2: #ea580c;
+  --good: #16a34a;
+  --warn: #d97706;
+  --danger: #dc2626;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Segoe UI', 'Tahoma', sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%, #d7eef5 0%, transparent 35%),
+    radial-gradient(circle at 90% 20%, #fce2d2 0%, transparent 40%),
+    linear-gradient(180deg, #f6f8fb 0%, #edf1f7 100%);
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}

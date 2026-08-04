@@ -1,0 +1,383 @@
+Architettura generale
+                    +----------------------+
+                    |      GitLab CI       |
+                    +----------+-----------+
+                               |
+                          Webhook
+                               |
+                               v
++-----------------------------------------------------------+
+|                  Backend Spring Boot                      |
+|-----------------------------------------------------------|
+| Webhook Controller                                        |
+| Pipeline Manager                                          |
+| AI Analysis Service                                       |
+| Notification Service                                      |
+| Authentication (JWT)                                      |
+| REST API                                                  |
++-------------+----------------------+----------------------+
+              |                      |
+              |                      |
+              |                      |
+              v                      v
+      PostgreSQL               AI Server (Qwen)
+                                    |
+                               HTTP REST API
+                                    |
+                                    v
+                             Ollama / vLLM
+                                    |
+                                    v
+                             Modello LLM Locale
+
+              ^
+              |
+              |
++-------------+------------------------+
+|        Frontend Angular              |
+|--------------------------------------|
+| Dashboard                            |
+| Errori                               |
+| Pipeline                             |
+| Storico                              |
+| Configurazione                       |
+| Statistiche                          |
++--------------------------------------+
+Componenti
+1) Frontend
+
+Responsabilità:
+
+Login
+Dashboard
+elenco pipeline
+elenco errori
+analisi AI
+statistiche
+notifiche
+impostazioni
+
+Tecnologie
+
+Angular 20
+Angular Material
+RxJS
+Chart.js
+WebSocket
+2) Backend
+
+Spring Boot
+
+Si occupa di:
+
+ricevere webhook GitLab
+interrogare GitLab API
+salvare dati
+chiamare il modello AI
+inviare notifiche
+esporre REST API
+
+Layer:
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+3) Database
+
+PostgreSQL
+
+Contiene
+
+Projects
+
+Pipelines
+
+Jobs
+
+Errors
+
+AI Analysis
+
+Notifications
+
+Users
+
+Settings
+4) Server AI
+
+Separato dal backend.
+
+Responsabilità
+
+ricevere prompt
+analizzare log
+restituire risposta
+
+Espone una semplice API REST
+
+POST /api/generate
+
+oppure
+
+POST /v1/chat/completions
+
+(se compatibile OpenAI)
+
+Flusso principale
+Pipeline GitLab fallisce
+
+↓
+
+GitLab invia Webhook
+
+↓
+
+Backend riceve evento
+
+↓
+
+Backend recupera log
+
+↓
+
+Backend costruisce Prompt
+
+↓
+
+Invia Prompt al modello AI
+
+↓
+
+AI analizza
+
+↓
+
+Restituisce
+
+- causa
+
+- gravità
+
+- soluzione
+
+↓
+
+Backend salva tutto
+
+↓
+
+Frontend aggiorna dashboard
+Flusso AI
+Log Pipeline
+
+↓
+
+Prompt Builder
+
+↓
+
+LLM
+
+↓
+
+Output JSON
+
+↓
+
+Backend
+
+↓
+
+Database
+
+↓
+
+Dashboard
+Flusso notifiche
+Errore Critico
+
+↓
+
+Backend
+
+↓
+
+Notification Service
+
+↓
+
+Email
+
+Teams
+
+Slack
+
+Discord
+
+Telegram
+
+Dashboard
+Flusso autenticazione
+Utente
+
+↓
+
+Login
+
+↓
+
+JWT
+
+↓
+
+Backend
+
+↓
+
+REST API
+
+↓
+
+Frontend
+Comunicazione tra componenti
+Frontend
+     |
+ REST API
+     |
+Backend
+     |
+ HTTP
+     |
+AI Server
+
+Backend
+     |
+ JDBC
+     |
+PostgreSQL
+
+GitLab
+     |
+Webhook
+     |
+Backend
+Architettura del repository
+ai-devops-assistant/
+
+backend/
+
+frontend/
+
+ai-server/
+
+database/
+
+docker/
+
+.devcontainer/
+
+docs/
+
+scripts/
+
+Architettura Docker
+Docker Compose
+
+│
+
+├── frontend
+
+├── backend
+
+├── postgres
+
+├── ai-server
+
+└── pgadmin
+Responsabilità di ogni servizio
+Frontend
+
+Visualizzazione.
+
+Backend
+
+Logica.
+
+AI
+
+Ragionamento.
+
+Database
+
+Persistenza.
+
+GitLab
+
+Origine degli eventi.
+
+Come lavora il modello AI
+
+Il modello non conosce direttamente GitLab.
+
+Riceve solamente un prompt come questo:
+
+Pipeline:
+
+backend-build
+
+Errore:
+
+Cannot find symbol UserRepository
+
+Commit:
+
+Fix login endpoint
+
+Log:
+
+....
+
+Analizza:
+
+1) causa
+
+2) priorità
+
+3) soluzione
+
+4) probabilità che sia corretta
+
+Risposta:
+
+{
+  "severity":"HIGH",
+  "cause":"Classe rinominata",
+  "solution":"Aggiornare l'import di UserRepository",
+  "confidence":0.94
+}
+
+Il backend interpreta questa risposta e la salva nel database.
+
+Evoluzioni future
+
+L'architettura è pensata per crescere. Potrai aggiungere:
+
+🤖 Agente AI che apre automaticamente Merge Request.
+🔍 Analisi preventiva del codice prima della pipeline.
+📊 Predizione delle pipeline che probabilmente falliranno.
+🛠️ Suggerimenti automatici di refactoring.
+📈 Dashboard KPI DevOps con trend, tempi medi di build e tassi di errore.
+🔗 Supporto a GitHub, Azure DevOps e Jenkins.
+💬 Chat AI integrata che risponde a domande come "Perché la pipeline #245 è fallita?" o "Mostrami tutti gli errori ricorrenti dell'ultima settimana".
+
+Questa architettura è modulare: ogni componente (frontend, backend, AI e database) è indipendente e comunica tramite API, rendendo semplice sostituire il modello AI, scalare i servizi o distribuire l'applicazione in locale, su server o in cloud senza modificare il resto del sistema.
