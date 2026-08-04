@@ -1,0 +1,26 @@
+<mat-card>
+  <h2>Impostazioni</h2>
+
+  <form [formGroup]="form" class="settings-form" (ngSubmit)="save()">
+    <mat-form-field appearance="outline">
+      <mat-label>GitLab URL</mat-label>
+      <input matInput formControlName="gitlabUrl" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>AI Base URL</mat-label>
+      <input matInput formControlName="aiBaseUrl" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Webhook Token</mat-label>
+      <input matInput formControlName="webhookToken" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Salva</button>
+  </form>
+
+  @if (saved) {
+    <p class="saved">Impostazioni salvate localmente (placeholder UI).</p>
+  }
+</mat-card>

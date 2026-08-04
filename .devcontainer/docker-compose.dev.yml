@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  backend-dev:
+    image: mcr.microsoft.com/devcontainers/java:1-21-bullseye
+    command: sleep infinity
+    working_dir: /workspaces/SoftwareAi/backend
+    volumes:
+      - ..:/workspaces/SoftwareAi:cached
+      - maven-cache:/home/vscode/.m2
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_URL: jdbc:postgresql://postgres:5432/aidevops_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      JWT_SECRET: 1234567890123456789012345678901234567890
+      AI_BASE_URL: http://host.docker.internal:11434
+      AI_GENERATE_PATH: /v1/chat/completions
+      AI_MODEL: qwen3
+      GITLAB_URL: https://gitlab.com
+      GITLAB_TOKEN: ''
+      GITLAB_WEBHOOK_TOKEN: change-me
+    depends_on:
+      - postgres
+
+  frontend-dev:
+    image: mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm
+    command: sleep infinity
+    working_dir: /workspaces/SoftwareAi/frontend
+    volumes:
+      - ..:/workspaces/SoftwareAi:cached
+      - npm-cache:/home/node/.npm
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+    depends_on:
+      - backend-dev
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aidevops_dev
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@aidevops.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgres
+
+volumes:
+  postgres-data:
+  maven-cache:
+  npm-cache:

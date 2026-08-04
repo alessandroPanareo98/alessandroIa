@@ -1,0 +1,31 @@
+{
+  "name": "AI DevOps Backend",
+  "dockerComposeFile": [
+    "../docker-compose.dev.yml"
+  ],
+  "service": "backend-dev",
+  "workspaceFolder": "/workspaces/SoftwareAi/backend",
+  "runServices": [
+    "backend-dev",
+    "frontend-dev",
+    "postgres",
+    "pgadmin"
+  ],
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [8080, 4200, 5432, 5050],
+  "postCreateCommand": "mvn -v",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-spring-boot",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.vscode-node-azure-pack"
+      ],
+      "settings": {
+        "java.compile.nullAnalysis.mode": "automatic",
+        "spring-boot.ls.checkForSpringInitializrUpdates": false
+      }
+    }
+  }
+}

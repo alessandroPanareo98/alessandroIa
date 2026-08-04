@@ -1,0 +1,40 @@
+<section class="cards-grid">
+  <mat-card class="kpi-card">
+    <div class="kpi-label">Pipeline Totali</div>
+    <div class="kpi-value">{{ summary().totalPipelines }}</div>
+  </mat-card>
+
+  <mat-card class="kpi-card danger">
+    <div class="kpi-label">Pipeline Fallite</div>
+    <div class="kpi-value">{{ summary().failedPipelines }}</div>
+  </mat-card>
+
+  <mat-card class="kpi-card">
+    <div class="kpi-label">Success Rate</div>
+    <div class="kpi-value">{{ summary().successRate }}%</div>
+    <mat-progress-bar mode="determinate" [value]="summary().successRate"></mat-progress-bar>
+  </mat-card>
+
+  <mat-card class="kpi-card">
+    <div class="kpi-label">Confidence AI Media</div>
+    <div class="kpi-value">{{ summary().avgConfidence }}%</div>
+  </mat-card>
+</section>
+
+<section class="charts-grid">
+  <mat-card>
+    <div class="section-title">
+      <mat-icon>query_stats</mat-icon>
+      Trend Pipeline (7 giorni)
+    </div>
+    <canvas baseChart [type]="trendType" [data]="lineData" [options]="lineOptions"></canvas>
+  </mat-card>
+
+  <mat-card>
+    <div class="section-title">
+      <mat-icon>error</mat-icon>
+      Distribuzione Severita Errori
+    </div>
+    <canvas baseChart [type]="severityType" [data]="severityData" [options]="severityOptions"></canvas>
+  </mat-card>
+</section>

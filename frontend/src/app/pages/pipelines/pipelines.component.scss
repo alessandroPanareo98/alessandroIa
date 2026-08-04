@@ -1,0 +1,23 @@
+.full-table {
+  width: 100%;
+}
+
+mat-chip {
+  color: #fff;
+}
+
+.status-success {
+  background: #16a34a;
+}
+
+.status-failed {
+  background: #dc2626;
+}
+
+.status-running {
+  background: #0e7490;
+}
+
+.status-canceled {
+  background: #6b7280;
+}
