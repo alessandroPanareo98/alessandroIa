@@ -20,7 +20,8 @@
         "vscjava.vscode-java-pack",
         "vmware.vscode-spring-boot",
         "ms-azuretools.vscode-docker",
-        "ms-vscode.vscode-node-azure-pack"
+        "ms-vscode.vscode-node-azure-pack",
+        "openai.chatgpt"
       ],
       "settings": {
         "java.compile.nullAnalysis.mode": "automatic",

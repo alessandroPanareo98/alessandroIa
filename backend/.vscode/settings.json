@@ -1,0 +1,9 @@
+{
+  "terminal.integrated.env.linux": {
+    "JAVA_HOME": "/usr/lib/jvm/msopenjdk-current",
+    "PATH": "/usr/lib/jvm/msopenjdk-current/bin:${env:PATH}"
+  },
+  "java.jdt.ls.java.home": "/usr/lib/jvm/msopenjdk-current",
+  "java.project.importOnFirstTimeStartup": "automatic",
+  "java.import.maven.enabled": true
+}

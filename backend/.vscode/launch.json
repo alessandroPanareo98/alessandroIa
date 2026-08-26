@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "AI DevOps Assistant",
+            "request": "launch",
+            "mainClass": "com.aidevops.backend.AiDevopsAssistantApplication",
+            "projectName": "backend"
+        }
+    ]
+}

@@ -2,7 +2,10 @@ version: '3.9'
 
 services:
   backend-dev:
-    image: mcr.microsoft.com/devcontainers/java:1-21-bullseye
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: aidevops-backend-dev
     command: sleep infinity
     working_dir: /workspaces/SoftwareAi/backend
     volumes:
