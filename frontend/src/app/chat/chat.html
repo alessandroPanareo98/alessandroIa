@@ -1,0 +1,135 @@
+<div class="chat-container">
+
+    <!-- HEADER -->
+    <header class="chat-header">
+  
+      <div class="chat-title">
+        <div class="ai-icon">
+          🤖
+        </div>
+  
+        <div>
+          <h1>AI DevOps Assistant</h1>
+          <span class="status">
+            <span class="status-dot"></span>
+            Online
+          </span>
+        </div>
+      </div>
+  
+    </header>
+  
+  
+    <!-- MESSAGES -->
+    <main
+      #messagesContainer
+      class="messages-container">
+  
+      <div
+        *ngFor="let message of messages"
+        class="message-row"
+        [class.user-message]="message.role === 'user'"
+        [class.assistant-message]="message.role === 'assistant'">
+  
+        <div class="message-avatar">
+  
+          <span *ngIf="message.role === 'assistant'">
+            🤖
+          </span>
+  
+          <span *ngIf="message.role === 'user'">
+            👤
+          </span>
+  
+        </div>
+  
+  
+        <div class="message-content">
+  
+          <div class="message-author">
+  
+            {{ message.role === 'user' ? 'You' : 'AI Assistant' }}
+  
+          </div>
+  
+          <div class="message-bubble">
+  
+            {{ message.content }}
+  
+          </div>
+  
+          <div class="message-time">
+  
+            {{ message.timestamp | date:'HH:mm' }}
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+  
+      <!-- LOADING -->
+      <div
+        *ngIf="loading"
+        class="message-row assistant-message">
+  
+        <div class="message-avatar">
+          🤖
+        </div>
+  
+        <div class="message-content">
+  
+          <div class="message-author">
+            AI Assistant
+          </div>
+  
+          <div class="message-bubble loading-bubble">
+  
+            <span></span>
+            <span></span>
+            <span></span>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </main>
+  
+  
+    <!-- INPUT -->
+    <footer class="chat-input-area">
+  
+      <div class="input-container">
+  
+        <textarea
+          [(ngModel)]="message"
+          (keydown)="onKeyDown($event)"
+          placeholder="Scrivi un messaggio..."
+          rows="1"
+          [disabled]="loading">
+        </textarea>
+  
+        <button
+          type="button"
+          class="send-button"
+          (click)="sendMessage()"
+          [disabled]="!message.trim() || loading"
+          aria-label="Invia messaggio">
+  
+          ➤
+  
+        </button>
+  
+      </div>
+  
+      <div class="input-hint">
+        Premi <strong>Enter</strong> per inviare ·
+        <strong>Shift + Enter</strong> per una nuova riga
+      </div>
+  
+    </footer>
+  
+  </div>
