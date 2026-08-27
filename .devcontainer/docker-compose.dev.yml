@@ -17,7 +17,7 @@ services:
       POSTGRES_PASSWORD: postgres
       JWT_SECRET: 1234567890123456789012345678901234567890
 
-      AI_BASE_URL: http://host.docker.internal:11434
+      AI_BASE_URL: http://ollama:11434
       AI_GENERATE_PATH: /v1/chat/completions
       AI_MODEL: qwen3
 
@@ -97,6 +97,18 @@ services:
     networks:
       - aidevops-network
 
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+
+    ports:
+      - "11434:11434"
+
+    volumes:
+      - ollama-data:/root/.ollama
+
+    networks:
+      - aidevops-network
 networks:
   aidevops-network:
     driver: bridge
@@ -105,3 +117,4 @@ volumes:
   postgres-data:
   maven-cache:
   npm-cache:
+  ollama-data:

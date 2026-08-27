@@ -40,3 +40,18 @@ Configurazione Dev Container per avviare backend, frontend e database PostgreSQL
 - URL: http://localhost:5050
 - Email: admin@aidevops.local
 - Password: admin
+
+
+alessandro.panareo@SIN-NB-1381 MINGW64 ~/Documents/Storage/alessandrobk/alessandroIa (main)
+$ docker compose -f .devcontainer/docker-compose.dev.yml config --services
+postgres
+backend-dev
+frontend-dev
+ollama
+pgadmin
+
+alessandro.panareo@SIN-NB-1381 MINGW64 ~/Documents/Storage/alessandrobk/alessandroIa (main)
+$ ^C
+
+alessandro.panareo@SIN-NB-1381 MINGW64 ~/Documents/Storage/alessandrobk/alessandroIa (main)
+$ docker compose -f .devcontainer/docker-compose.dev.yml up -d
