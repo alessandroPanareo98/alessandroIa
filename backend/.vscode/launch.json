@@ -5,8 +5,7 @@
             "type": "java",
             "name": "AI DevOps Assistant",
             "request": "launch",
-            "mainClass": "com.aidevops.backend.AiDevopsAssistantApplication",
-            "projectName": "backend"
+            "mainClass": "com.aidevops.backend.AiDevopsAssistantApplication"
         }
     ]
 }

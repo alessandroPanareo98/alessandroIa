@@ -1,0 +1,51 @@
+# Java / Maven
+**/target/
+**/.mvn/timing.properties
+**/dependency-reduced-pom.xml
+
+# Node / Angular
+**/node_modules/
+**/dist/
+**/.angular/cache/
+**/.sass-cache/
+**/coverage/
+**/tmp/
+**/out-tsc/
+**/bazel-out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dev containers and local caches
+**/.m2/
+
+# IDEs and editors
+.idea/
+**/.project
+**/.classpath
+**/.settings/
+**/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+*.sublime-workspace
+*.sublime-project
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Test and tool artifacts
+**/test-output/
+**/__screenshots__/

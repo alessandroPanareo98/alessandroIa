@@ -5,5 +5,22 @@
   },
   "java.jdt.ls.java.home": "/usr/lib/jvm/msopenjdk-current",
   "java.project.importOnFirstTimeStartup": "automatic",
-  "java.import.maven.enabled": true
+  "java.import.maven.enabled": true,
+  "java.project.sourcePaths": [
+    "src/main/java"
+  ],
+  "java.project.outputPath": "target/classes",
+  "sqltools.connections": [
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "postgres",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "postgres",
+      "group": "postgres",
+      "database": "postgres",
+      "username": "postgres"
+    }
+  ]
 }

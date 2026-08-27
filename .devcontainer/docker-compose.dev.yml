@@ -5,6 +5,7 @@ services:
       context: ..
       dockerfile: .devcontainer/backend/Dockerfile
     image: aidevops-backend-dev
+    command: sleep infinity
   
     ports:
       - "8080:8080"
@@ -103,9 +104,6 @@ services:
   ollama:
     image: ollama/ollama:latest
     restart: unless-stopped
-
-    ports:
-      - "11434:11434"
 
     volumes:
       - ollama-data:/root/.ollama
