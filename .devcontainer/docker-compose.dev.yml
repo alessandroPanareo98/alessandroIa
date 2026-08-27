@@ -2,13 +2,13 @@ services:
 
   backend-dev:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
+      context: ..
+      dockerfile: .devcontainer/backend/Dockerfile
     image: aidevops-backend-dev
     command: sleep infinity
     working_dir: /workspaces/SoftwareAi/backend
     volumes:
-      - .:/workspaces/SoftwareAi:cached
+      - ..:/workspaces/SoftwareAi:cached
       - maven-cache:/home/vscode/.m2
     environment:
       SPRING_PROFILES_ACTIVE: dev
@@ -37,7 +37,7 @@ services:
     command: sleep infinity
     working_dir: /workspaces/SoftwareAi/frontend
     volumes:
-      - .:/workspaces/SoftwareAi:cached
+      - ..:/workspaces/SoftwareAi:cached
       - npm-cache:/home/node/.npm
 
     environment:
