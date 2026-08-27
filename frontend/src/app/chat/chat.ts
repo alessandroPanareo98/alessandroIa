@@ -1,45 +1,41 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ChatService } from '../services/chat.service';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
 }
-
 @Component({
   selector: 'app-chat',
-  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './chat.html',
-  styleUrl: './chat.scss'
+  styleUrls: ['./chat.scss']
 })
 export class ChatComponent {
 
-  @ViewChild('messagesContainer')
-  private messagesContainer!: ElementRef<HTMLDivElement>;
+  messages: ChatMessage[] = [];
 
   message = '';
-
   loading = false;
 
-  messages: ChatMessage[] = [
-    {
-      role: 'assistant',
-      content: 'Ciao! 👋 Sono il tuo AI DevOps Assistant. Come posso aiutarti?',
-      timestamp: new Date()
-    }
-  ];
+  conversationId?: string;
+
+  constructor(
+    private readonly chatService: ChatService
+  ) {}
 
   sendMessage(): void {
+
     const content = this.message.trim();
 
     if (!content || this.loading) {
       return;
     }
 
-    // Messaggio utente
+    // Messaggio dell'utente
     this.messages.push({
       role: 'user',
       content,
@@ -47,46 +43,39 @@ export class ChatComponent {
     });
 
     this.message = '';
-
-    this.scrollToBottom();
-
-    // Simulazione risposta AI
     this.loading = true;
 
-    setTimeout(() => {
+    this.chatService.sendMessage({
+      message: content,
+      conversationId: this.conversationId
+    }).subscribe({
 
-      this.messages.push({
-        role: 'assistant',
-        content: `Ho ricevuto il tuo messaggio:
+      next: response => {
 
-"${content}"
+        this.conversationId = response.conversationId;
 
-Questa è una risposta simulata. Successivamente collegheremo questa chat al backend Spring Boot.`,
-        timestamp: new Date()
-      });
+        this.messages.push({
+          role: 'assistant',
+          content: response.message,
+          timestamp: new Date()
+        });
 
-      this.loading = false;
+        this.loading = false;
+      },
 
-      this.scrollToBottom();
+      error: error => {
 
-    }, 1000);
-  }
+        console.error('Errore comunicazione AI:', error);
 
-  onKeyDown(event: KeyboardEvent): void {
+        this.messages.push({
+          role: 'assistant',
+          content: 'Si è verificato un errore nella comunicazione con il server.',
+          timestamp: new Date()
+        });
 
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      this.sendMessage();
-    }
-  }
-
-  private scrollToBottom(): void {
-    setTimeout(() => {
-      if (this.messagesContainer) {
-        const element = this.messagesContainer.nativeElement;
-
-        element.scrollTop = element.scrollHeight;
+        this.loading = false;
       }
+
     });
   }
 }

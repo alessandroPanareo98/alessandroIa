@@ -1,135 +1,75 @@
-<div class="chat-container">
+<main class="chat-container">
+  <header class="chat-header">
+    <div class="chat-title">
+      <div class="ai-icon" aria-hidden="true">✦</div>
+      <div>
+        <h1>DevOps Assistant</h1>
+        <div class="status"><span class="status-dot"></span>Online e pronto ad aiutarti</div>
+      </div>
+    </div>
+    <span class="model-label">OLLAMA / AI</span>
+  </header>
 
-    <!-- HEADER -->
-    <header class="chat-header">
-  
-      <div class="chat-title">
-        <div class="ai-icon">
-          🤖
-        </div>
-  
-        <div>
-          <h1>AI DevOps Assistant</h1>
-          <span class="status">
-            <span class="status-dot"></span>
-            Online
-          </span>
+  <section class="messages-container" aria-live="polite">
+    <div class="welcome-panel" *ngIf="messages.length === 0">
+      <span class="welcome-kicker">CONVERSAZIONE NUOVA</span>
+      <h2>Su cosa lavoriamo oggi?</h2>
+      <p>Chiedimi di analizzare un progetto, diagnosticare una pipeline o migliorare il tuo workflow.</p>
+      <div class="suggestions" aria-label="Suggerimenti">
+        <span>Analizza la pipeline CI/CD</span>
+        <span>Trova un errore nel deploy</span>
+        <span>Spiega questo log</span>
+      </div>
+    </div>
+
+    <div
+      *ngFor="let chatMessage of messages"
+      class="message-row"
+      [class.user-message]="chatMessage.role === 'user'"
+      [class.assistant-message]="chatMessage.role === 'assistant'"
+    >
+      <div class="message-avatar" aria-hidden="true">
+        {{ chatMessage.role === 'user' ? 'TU' : '✦' }}
+      </div>
+      <div class="message-content">
+        <span class="message-author">{{ chatMessage.role === 'user' ? 'Tu' : 'Assistant' }}</span>
+        <div class="message-bubble">{{ chatMessage.content }}</div>
+        <span class="message-time">{{ chatMessage.timestamp | date:'HH:mm' }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="message-row assistant-message">
+      <div class="message-avatar" aria-hidden="true">✦</div>
+      <div class="message-content">
+        <span class="message-author">Assistant</span>
+        <div class="message-bubble loading-bubble" aria-label="L'assistant sta elaborando">
+          <span></span><span></span><span></span>
         </div>
       </div>
-  
-    </header>
-  
-  
-    <!-- MESSAGES -->
-    <main
-      #messagesContainer
-      class="messages-container">
-  
-      <div
-        *ngFor="let message of messages"
-        class="message-row"
-        [class.user-message]="message.role === 'user'"
-        [class.assistant-message]="message.role === 'assistant'">
-  
-        <div class="message-avatar">
-  
-          <span *ngIf="message.role === 'assistant'">
-            🤖
-          </span>
-  
-          <span *ngIf="message.role === 'user'">
-            👤
-          </span>
-  
-        </div>
-  
-  
-        <div class="message-content">
-  
-          <div class="message-author">
-  
-            {{ message.role === 'user' ? 'You' : 'AI Assistant' }}
-  
-          </div>
-  
-          <div class="message-bubble">
-  
-            {{ message.content }}
-  
-          </div>
-  
-          <div class="message-time">
-  
-            {{ message.timestamp | date:'HH:mm' }}
-  
-          </div>
-  
-        </div>
-  
-      </div>
-  
-  
-      <!-- LOADING -->
-      <div
-        *ngIf="loading"
-        class="message-row assistant-message">
-  
-        <div class="message-avatar">
-          🤖
-        </div>
-  
-        <div class="message-content">
-  
-          <div class="message-author">
-            AI Assistant
-          </div>
-  
-          <div class="message-bubble loading-bubble">
-  
-            <span></span>
-            <span></span>
-            <span></span>
-  
-          </div>
-  
-        </div>
-  
-      </div>
-  
-    </main>
-  
-  
-    <!-- INPUT -->
-    <footer class="chat-input-area">
-  
-      <div class="input-container">
-  
-        <textarea
-          [(ngModel)]="message"
-          (keydown)="onKeyDown($event)"
-          placeholder="Scrivi un messaggio..."
-          rows="1"
-          [disabled]="loading">
-        </textarea>
-  
-        <button
-          type="button"
-          class="send-button"
-          (click)="sendMessage()"
-          [disabled]="!message.trim() || loading"
-          aria-label="Invia messaggio">
-  
-          ➤
-  
-        </button>
-  
-      </div>
-  
-      <div class="input-hint">
-        Premi <strong>Enter</strong> per inviare ·
-        <strong>Shift + Enter</strong> per una nuova riga
-      </div>
-  
-    </footer>
-  
-  </div>
+    </div>
+  </section>
+
+  <footer class="chat-input-area">
+    <div class="input-container">
+      <input
+        type="text"
+        [(ngModel)]="message"
+        (keyup.enter)="sendMessage()"
+        placeholder="Scrivi un messaggio..."
+        aria-label="Messaggio"
+        [disabled]="loading"
+      />
+      <button
+        class="send-button"
+        type="button"
+        (click)="sendMessage()"
+        [disabled]="loading || !message.trim()"
+        aria-label="Invia messaggio"
+        title="Invia messaggio"
+      >
+        ↑
+      </button>
+    </div>
+    <p class="input-hint">Invio per spedire · Le risposte possono contenere errori</p>
+  </footer>
+</main>

@@ -5,7 +5,10 @@ services:
       context: ..
       dockerfile: .devcontainer/backend/Dockerfile
     image: aidevops-backend-dev
-    command: sleep infinity
+  
+    ports:
+      - "8080:8080"
+
     working_dir: /workspaces/SoftwareAi/backend
     volumes:
       - ..:/workspaces/SoftwareAi:cached
