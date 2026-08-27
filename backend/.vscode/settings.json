@@ -10,6 +10,7 @@
     "src/main/java"
   ],
   "java.project.outputPath": "target/classes",
+  "java.configuration.maven.userSettings": "${workspaceFolder}/.mvn/settings.xml",
   "sqltools.connections": [
     {
       "ssh": "Disabled",

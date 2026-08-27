@@ -28,7 +28,7 @@
     5050
   ],
 
-  "postCreateCommand": "mvn -v",
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.m2 && mvn -v",
 
   "customizations": {
     "vscode": {
