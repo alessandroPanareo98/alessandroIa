@@ -13,7 +13,8 @@
     "backend-dev",
     "frontend-dev",
     "postgres",
-    "pgadmin"
+    "pgadmin",
+    "ollama"
   ],
 
   "shutdownAction": "stopCompose",

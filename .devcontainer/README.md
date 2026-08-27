@@ -20,6 +20,7 @@ Configurazione Dev Container per avviare backend, frontend e database PostgreSQL
 - frontend-dev (Node 20)
 - postgres (porta 5432)
 - pgadmin (porta 5050)
+- ollama (porta 11434)
 
 ## Comandi utili nel container
 - Backend:
