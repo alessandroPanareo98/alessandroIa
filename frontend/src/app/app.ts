@@ -68,7 +68,7 @@ export class App {
         break;
 
       case 'rules':
-        this.sectionLabel = 'PANAIA AI';
+        this.sectionLabel = 'IAGORA';
         this.sectionTitle = 'Regole della community';
         break;
 
