@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 
 import { ChatComponent } from './chat/chat';
 import { CommunityComponent } from './community/community';
+import { FooterComponent } from './footer/footer';
+import { HeaderComponent } from './header/header';
 import { RulesComponent } from './rules/rules';
+
 type Section =
   | 'home'
   | 'chat'
@@ -18,6 +21,8 @@ type Section =
     CommonModule,
     ChatComponent,
     CommunityComponent,
+    FooterComponent,
+    HeaderComponent,
     RulesComponent
   ],
   templateUrl: './app.html',

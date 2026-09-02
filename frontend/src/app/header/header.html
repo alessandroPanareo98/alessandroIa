@@ -1,0 +1,91 @@
+<!-- TOP NAVIGATION -->
+<nav class="top-navigation">
+
+  <!-- BRAND -->
+  <div class="navbar-brand">
+    <div class="brand-logo">
+      ✦
+    </div>
+
+    <div class="brand-text">
+      <strong>PANAIA</strong>
+      <span>AI Community Platform</span>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <div class="navbar-menu">
+
+    <button
+      class="nav-item"
+      [class.active]="activeSection === 'home'"
+      (click)="navigate('home')"
+    >
+      <span class="nav-icon">⌂</span>
+      <span>Home</span>
+    </button>
+
+    <button
+      class="nav-item"
+      [class.active]="activeSection === 'chat'"
+      (click)="navigate('chat')"
+    >
+      <span class="nav-icon">✦</span>
+      <span>Chat</span>
+    </button>
+
+    <button
+      class="nav-item"
+      [class.active]="activeSection === 'communities'"
+      (click)="navigate('communities')"
+    >
+      <span class="nav-icon">♧</span>
+      <span>Community</span>
+    </button>
+
+    <button
+      class="nav-item"
+      [class.active]="activeSection === 'knowledge'"
+      (click)="navigate('knowledge')"
+    >
+      <span class="nav-icon">▤</span>
+      <span>Knowledge</span>
+    </button>
+
+    <button
+      class="nav-item"
+      [class.active]="activeSection === 'rules'"
+      (click)="navigate('rules')"
+    >
+      <span class="nav-icon">◇</span>
+      <span>Regole AI</span>
+    </button>
+
+    <button
+      class="nav-item"
+      [class.active]="activeSection === 'settings'"
+      (click)="navigate('settings')"
+    >
+      <span class="nav-icon">⚙</span>
+      <span>Impostazioni</span>
+    </button>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="navbar-actions">
+
+    <button
+      class="icon-button"
+      title="Notifiche"
+    >
+      ♢
+    </button>
+
+    <div class="user-avatar">
+      U
+    </div>
+
+  </div>
+
+</nav>

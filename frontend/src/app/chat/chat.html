@@ -4,9 +4,7 @@
   <header class="panaia-header">
 
     <div class="brand">
-      <div class="brand-mark">
-        ✦
-      </div>
+      <div class="brand-mark">✦</div>
 
       <div class="brand-info">
         <h1>PANAIA</h1>
@@ -22,7 +20,7 @@
   </header>
 
 
-  <!-- CONVERSATION -->
+  <!-- AREA CHAT -->
   <section class="conversation">
 
     <!-- WELCOME -->
@@ -38,7 +36,7 @@
 
       <h2>
         Un'intelligenza artificiale
-        <span>costruita per aiutarti.</span>
+        <span>costruita per sostenerti.</span>
       </h2>
 
       <p class="welcome-description">
@@ -46,7 +44,6 @@
         le tue domande, ragionare sui problemi, aiutarti a trovare
         soluzioni e seguire le regole definite dalla propria community.
       </p>
-
 
       <!-- PURPOSE -->
       <div class="purpose-grid">
@@ -138,7 +135,7 @@
     </div>
 
 
-    <!-- MESSAGES -->
+    <!-- MESSAGGI -->
     <div class="messages">
 
       <div
@@ -160,10 +157,10 @@
 
         </div>
 
-
         <div class="message-content">
 
           <div class="message-meta">
+
             <span class="message-author">
               {{ chatMessage.role === 'user' ? 'Tu' : 'PANAIA' }}
             </span>
@@ -171,6 +168,7 @@
             <span class="message-time">
               {{ chatMessage.timestamp | date:'HH:mm' }}
             </span>
+
           </div>
 
           <div class="message-bubble">
@@ -201,11 +199,9 @@
           </div>
 
           <div class="message-bubble loading-bubble">
-
             <span></span>
             <span></span>
             <span></span>
-
           </div>
 
         </div>
@@ -217,8 +213,8 @@
   </section>
 
 
-  <!-- INPUT -->
-  <footer class="composer-area">
+  <!-- COMPOSER CENTRATO -->
+  <section class="composer-area">
 
     <div class="composer">
 
@@ -244,6 +240,7 @@
     </div>
 
     <div class="composer-footer">
+
       <span>
         PANAIA può commettere errori. Verifica le informazioni importanti.
       </span>
@@ -251,8 +248,9 @@
       <span>
         AI · OLLAMA
       </span>
+
     </div>
 
-  </footer>
+  </section>
 
 </main>

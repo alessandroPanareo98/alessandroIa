@@ -1,124 +1,9 @@
 <div class="app-shell">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <!-- BRAND -->
-    <div class="sidebar-brand">
-
-      <div class="brand-logo">
-        ✦
-      </div>
-
-      <div class="brand-text">
-        <strong>PANAIA</strong>
-        <span>AI Community Platform</span>
-      </div>
-
-    </div>
-
-
-    <!-- NAVIGATION -->
-    <nav class="navigation">
-
-      <span class="navigation-title">
-        PRINCIPALE
-      </span>
-
-      <button
-        class="nav-item"
-        [class.active]="activeSection === 'home'"
-        (click)="navigate('home')"
-      >
-        <span class="nav-icon">⌂</span>
-        <span>Home</span>
-      </button>
-
-
-      <button
-        class="nav-item"
-        [class.active]="activeSection === 'chat'"
-        (click)="navigate('chat')"
-      >
-        <span class="nav-icon">✦</span>
-        <span>Chat</span>
-      </button>
-
-
-      <span class="navigation-title">
-        COMMUNITY
-      </span>
-
-
-      <button
-        class="nav-item"
-        [class.active]="activeSection === 'communities'"
-        (click)="navigate('communities')"
-      >
-        <span class="nav-icon">♧</span>
-        <span>Community</span>
-      </button>
-
-
-      <button
-        class="nav-item"
-        [class.active]="activeSection === 'knowledge'"
-        (click)="navigate('knowledge')"
-      >
-        <span class="nav-icon">▤</span>
-        <span>Knowledge</span>
-      </button>
-
-
-      <span class="navigation-title">
-        PANAIA
-      </span>
-
-
-      <button
-        class="nav-item"
-        [class.active]="activeSection === 'rules'"
-        (click)="navigate('rules')"
-      >
-        <span class="nav-icon">◇</span>
-        <span>Regole AI</span>
-      </button>
-
-
-      <button
-        class="nav-item"
-        [class.active]="activeSection === 'settings'"
-        (click)="navigate('settings')"
-      >
-        <span class="nav-icon">⚙</span>
-        <span>Impostazioni</span>
-      </button>
-
-    </nav>
-
-
-    <!-- SIDEBAR FOOTER -->
-    <div class="sidebar-footer">
-
-      <div class="community-status">
-
-        <span class="status-dot"></span>
-
-        <div>
-          <strong>PANAIA Online</strong>
-          <small>AI disponibile</small>
-        </div>
-
-      </div>
-
-      <div class="version">
-        PANAIA v0.1
-      </div>
-
-    </div>
-
-  </aside>
-
+<app-header
+  [activeSection]="activeSection"
+  (sectionChange)="navigate($event)"
+></app-header>
 
   <!-- MAIN -->
   <main class="main-content">
@@ -176,9 +61,13 @@
           </h2>
 
           <p>
-            PANAIA nasce per mettere l'intelligenza artificiale
-            al servizio delle persone, favorendo aggregazione,
-            collaborazione e sviluppo di soluzioni comuni.
+PANAIA nasce per mettere l'intelligenza artificiale al servizio delle persone, favorendo aggregazione, collaborazione e sviluppo di soluzioni comuni.
+
+La nostra mission è realizzare un portale di aggregazione basato sull'intelligenza artificiale, dove persone e community possano collaborare, condividere conoscenze e definire le regole e i comportamenti della propria AI.
+
+PANAIA sfrutta modelli di intelligenza artificiale open source, offrendo a ogni community la possibilità di costruire e configurare un'esperienza AI coerente con i propri valori, obiettivi e necessità.
+
+Un'intelligenza artificiale non imposta dall'alto, ma costruita insieme alle persone che la utilizzano. 🧠🤝
           </p>
 
           <button
@@ -314,5 +203,5 @@
     </section>
 
   </main>
-
+  <app-footer></app-footer>
 </div>
