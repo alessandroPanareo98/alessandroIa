@@ -3,17 +3,22 @@ package com.aidevops.backend.integration;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import com.aidevops.backend.analysis.AiGenerateResponse;
 import com.aidevops.backend.config.AppProperties;
+import com.aidevops.backend.service.AiSettingService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class AiClientService {
+    @Autowired
+    private AiSettingService aiSettingService;
+    
 
     private final RestClient restClient;
     private final AppProperties appProperties;
@@ -50,15 +55,28 @@ public class AiClientService {
     }
 
     public String chat(String message) {
+        String systemPrompt = aiSettingService.getSetting("ai.system_prompt");
+
+
+        if (systemPrompt == null || systemPrompt.isBlank()) {
+            systemPrompt = "Sei un assistente DevOps. Rispondi in italiano in modo chiaro e pratico.";
+        }
+
         Map<String, Object> payload = Map.of(
-                "model", appProperties.ai().model(),
-                "messages", List.of(
-                        Map.of("role", "system", "content", "Sei un assistente DevOps. Rispondi in italiano in modo chiaro e pratico."),
-                        Map.of("role", "user", "content", message)
-                ),
-                "stream", false,
-                "temperature", 0.2
-        );
+            "model", appProperties.ai().model(),
+            "messages", List.of(
+                    Map.of(
+                        "role", "system",
+                        "content", systemPrompt
+                    ),
+                    Map.of(
+                        "role", "user",
+                        "content", message
+                    )
+            ),
+            "stream", false,
+            "temperature", 0.2
+    );
 
         String endpoint = appProperties.ai().baseUrl() + appProperties.ai().generatePath();
         String raw = restClient.post()

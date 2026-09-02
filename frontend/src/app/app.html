@@ -1,1 +1,318 @@
-<app-chat></app-chat>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- BRAND -->
+    <div class="sidebar-brand">
+
+      <div class="brand-logo">
+        ✦
+      </div>
+
+      <div class="brand-text">
+        <strong>PANAIA</strong>
+        <span>AI Community Platform</span>
+      </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+
+      <span class="navigation-title">
+        PRINCIPALE
+      </span>
+
+      <button
+        class="nav-item"
+        [class.active]="activeSection === 'home'"
+        (click)="navigate('home')"
+      >
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+      </button>
+
+
+      <button
+        class="nav-item"
+        [class.active]="activeSection === 'chat'"
+        (click)="navigate('chat')"
+      >
+        <span class="nav-icon">✦</span>
+        <span>Chat</span>
+      </button>
+
+
+      <span class="navigation-title">
+        COMMUNITY
+      </span>
+
+
+      <button
+        class="nav-item"
+        [class.active]="activeSection === 'communities'"
+        (click)="navigate('communities')"
+      >
+        <span class="nav-icon">♧</span>
+        <span>Community</span>
+      </button>
+
+
+      <button
+        class="nav-item"
+        [class.active]="activeSection === 'knowledge'"
+        (click)="navigate('knowledge')"
+      >
+        <span class="nav-icon">▤</span>
+        <span>Knowledge</span>
+      </button>
+
+
+      <span class="navigation-title">
+        PANAIA
+      </span>
+
+
+      <button
+        class="nav-item"
+        [class.active]="activeSection === 'rules'"
+        (click)="navigate('rules')"
+      >
+        <span class="nav-icon">◇</span>
+        <span>Regole AI</span>
+      </button>
+
+
+      <button
+        class="nav-item"
+        [class.active]="activeSection === 'settings'"
+        (click)="navigate('settings')"
+      >
+        <span class="nav-icon">⚙</span>
+        <span>Impostazioni</span>
+      </button>
+
+    </nav>
+
+
+    <!-- SIDEBAR FOOTER -->
+    <div class="sidebar-footer">
+
+      <div class="community-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>PANAIA Online</strong>
+          <small>AI disponibile</small>
+        </div>
+
+      </div>
+
+      <div class="version">
+        PANAIA v0.1
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+      <div>
+        <span class="section-kicker">
+          {{ sectionLabel }}
+        </span>
+
+        <h1>
+          {{ sectionTitle }}
+        </h1>
+      </div>
+
+      <div class="topbar-actions">
+
+        <button
+          class="icon-button"
+          title="Notifiche"
+        >
+          ♢
+        </button>
+
+        <div class="user-avatar">
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+    <section class="page-content">
+
+
+      <!-- HOME -->
+      <div
+        *ngIf="activeSection === 'home'"
+        class="home-page"
+      >
+
+        <div class="hero">
+
+          <span class="hero-badge">
+            ✦ PANAIA
+          </span>
+
+          <h2>
+            Una piattaforma AI
+            <span>per le community.</span>
+          </h2>
+
+          <p>
+            PANAIA nasce per mettere l'intelligenza artificiale
+            al servizio delle persone, favorendo aggregazione,
+            collaborazione e sviluppo di soluzioni comuni.
+          </p>
+
+          <button
+            class="primary-button"
+            (click)="navigate('chat')"
+          >
+            Inizia a parlare con PANAIA
+            <span>→</span>
+          </button>
+
+        </div>
+
+
+        <div class="home-grid">
+
+          <div class="home-card">
+            <span class="card-icon">💬</span>
+
+            <h3>Chat con PANAIA</h3>
+
+            <p>
+              Fai domande, analizza problemi e sviluppa idee
+              insieme all'intelligenza artificiale.
+            </p>
+
+            <button (click)="navigate('chat')">
+              Apri chat →
+            </button>
+          </div>
+
+
+          <div class="home-card">
+            <span class="card-icon">👥</span>
+
+            <h3>Community</h3>
+
+            <p>
+              Crea o partecipa a community con obiettivi,
+              interessi e conoscenze condivise.
+            </p>
+
+            <button (click)="navigate('communities')">
+              Esplora →
+            </button>
+          </div>
+
+
+          <div class="home-card">
+            <span class="card-icon">📚</span>
+
+            <h3>Knowledge</h3>
+
+            <p>
+              Costruisci una base di conoscenza condivisa
+              dalla community.
+            </p>
+
+            <button (click)="navigate('knowledge')">
+              Scopri →
+            </button>
+          </div>
+
+
+          <div class="home-card">
+            <span class="card-icon">🧠</span>
+
+            <h3>Regole AI</h3>
+
+            <p>
+              Definisci i principi e le regole che PANAIA
+              deve seguire all'interno della community.
+            </p>
+
+            <button (click)="navigate('rules')">
+              Gestisci →
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CHAT -->
+      <app-chat
+        *ngIf="activeSection === 'chat'"
+      ></app-chat>
+
+
+        <!-- COMMUNITY -->
+        <app-community
+        *ngIf="activeSection === 'communities'"
+        ></app-community>
+
+
+      <!-- KNOWLEDGE -->
+      <div
+        *ngIf="activeSection === 'knowledge'"
+        class="placeholder-page"
+      >
+        <span>▤</span>
+
+        <h2>Knowledge</h2>
+
+        <p>
+          La base di conoscenza condivisa
+          dalle community.
+        </p>
+      </div>
+
+
+      <!-- RULES -->
+    <app-rules
+    *ngIf="activeSection === 'rules'"
+    ></app-rules>
+
+      <!-- SETTINGS -->
+      <div
+        *ngIf="activeSection === 'settings'"
+        class="placeholder-page"
+      >
+        <span>⚙</span>
+
+        <h2>Impostazioni</h2>
+
+        <p>
+          Configurazione della piattaforma e
+          delle preferenze dell'utente.
+        </p>
+      </div>
+
+
+    </section>
+
+  </main>
+
+</div>

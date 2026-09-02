@@ -1,0 +1,188 @@
+<main class="community-page">
+
+  <!-- HEADER -->
+  <section class="community-hero">
+
+    <div>
+
+      <span class="page-badge">
+        PANAIA COMMUNITY
+      </span>
+
+      <h1>
+        Le community
+        <span>che fanno crescere PANAIA.</span>
+      </h1>
+
+      <p>
+        PANAIA nasce per mettere in contatto persone con interessi,
+        conoscenze e obiettivi comuni. Ogni community può collaborare,
+        condividere conoscenza e definire il modo in cui la propria AI
+        deve comportarsi.
+      </p>
+
+    </div>
+
+
+    <button class="create-button">
+      <span>＋</span>
+      Crea community
+    </button>
+
+  </section>
+
+
+  <!-- SEARCH -->
+  <section class="community-toolbar">
+
+    <div class="search-box">
+
+      <span>⌕</span>
+
+      <input
+        type="text"
+        placeholder="Cerca una community..."
+      />
+
+    </div>
+
+
+    <div class="categories">
+
+      <button
+        *ngFor="let category of categories"
+        [class.active]="selectedCategory === category"
+        (click)="selectCategory(category)"
+      >
+        {{ category }}
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+  <section class="community-stats">
+
+    <div class="stat-card">
+      <span class="stat-icon">👥</span>
+
+      <div>
+        <strong>{{ communities.length }}</strong>
+        <small>Community</small>
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <span class="stat-icon">◎</span>
+
+      <div>
+        <strong>781</strong>
+        <small>Membri</small>
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <span class="stat-icon">✦</span>
+
+      <div>
+        <strong>AI</strong>
+        <small>Community powered</small>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- COMMUNITY GRID -->
+  <section class="community-grid">
+
+    <article
+      *ngFor="let community of filteredCommunities"
+      class="community-card"
+    >
+
+      <div class="card-top">
+
+        <div
+          class="community-icon"
+          [class.orange]="community.color === 'orange'"
+          [class.purple]="community.color === 'purple'"
+          [class.blue]="community.color === 'blue'"
+          [class.green]="community.color === 'green'"
+        >
+          {{ community.icon }}
+        </div>
+
+        <span class="category">
+          {{ community.category }}
+        </span>
+
+      </div>
+
+
+      <h2>
+        {{ community.name }}
+      </h2>
+
+
+      <p>
+        {{ community.description }}
+      </p>
+
+
+      <div class="community-meta">
+
+        <span>
+          👥 {{ community.members }} membri
+        </span>
+
+        <span class="ai-badge">
+          ✦ PANAIA AI
+        </span>
+
+      </div>
+
+
+      <div class="card-actions">
+
+        <button class="open-button">
+          Apri community
+          <span>→</span>
+        </button>
+
+        <button
+          class="join-button"
+          [class.joined]="community.joined"
+          (click)="toggleJoin(community)"
+        >
+          {{ community.joined ? 'Iscritto' : 'Partecipa' }}
+        </button>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- EMPTY -->
+  <div
+    *ngIf="filteredCommunities.length === 0"
+    class="empty-state"
+  >
+
+    <span>⌕</span>
+
+    <h2>Nessuna community trovata</h2>
+
+    <p>
+      Prova a modificare i filtri o crea una nuova community.
+    </p>
+
+  </div>
+
+</main>

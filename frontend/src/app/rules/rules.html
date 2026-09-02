@@ -1,0 +1,325 @@
+<div class="rules-page">
+
+  <!-- HERO -->
+
+  <section class="rules-hero">
+
+    <div class="hero-content">
+
+      <span class="hero-badge">
+        ✦ PANAIA GOVERNANCE
+      </span>
+
+      <h2>
+        Ogni community può
+        <span>definire la propria AI.</span>
+      </h2>
+
+      <p>
+        Le community possono stabilire principi, comportamenti
+        e regole che PANAIA utilizzerà per adattare il proprio
+        comportamento alle esigenze dei loro membri.
+      </p>
+
+    </div>
+
+    <button
+      class="primary-button"
+      (click)="createCommunity()"
+    >
+      + Crea Community
+    </button>
+
+  </section>
+
+
+  <!-- COMMUNITY SELECTOR -->
+
+  <section class="community-section">
+
+    <div class="section-header">
+
+      <div>
+        <span class="section-kicker">
+          LE TUE COMMUNITY
+        </span>
+
+        <h3>
+          Seleziona una community
+        </h3>
+      </div>
+
+    </div>
+
+
+    <div class="community-list">
+
+      <button
+        *ngFor="let community of communities"
+        class="community-card"
+        [class.selected]="selectedCommunity.id === community.id"
+        (click)="selectCommunity(community)"
+      >
+
+        <div class="community-icon">
+          ✦
+        </div>
+
+        <div class="community-info">
+
+          <strong>
+            {{ community.name }}
+          </strong>
+
+          <span>
+            {{ community.members }} membri
+          </span>
+
+        </div>
+
+        <div
+          class="role-badge"
+          [class.admin]="community.role === 'ADMIN'"
+        >
+          {{ community.role === 'ADMIN' ? 'ADMIN' : 'MEMBRO' }}
+        </div>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SELECTED COMMUNITY -->
+
+  <section class="rules-workspace">
+
+    <div class="workspace-header">
+
+      <div>
+
+        <span class="section-kicker">
+          COMMUNITY SELEZIONATA
+        </span>
+
+        <h3>
+          {{ selectedCommunity.name }}
+        </h3>
+
+        <p>
+          {{ selectedCommunity.description }}
+        </p>
+
+      </div>
+
+      <div class="workspace-role">
+
+        <span
+          *ngIf="selectedCommunity.role === 'ADMIN'"
+          class="admin-status"
+        >
+          ● Amministratore
+        </span>
+
+        <button
+          *ngIf="selectedCommunity.role !== 'ADMIN'"
+          class="secondary-button"
+          (click)="becomeAdmin(selectedCommunity)"
+        >
+          Diventa amministratore
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ADMIN MESSAGE -->
+
+    <div
+      *ngIf="selectedCommunity.role === 'ADMIN'"
+      class="admin-banner"
+    >
+
+      <div class="banner-icon">
+        🧠
+      </div>
+
+      <div>
+
+        <strong>
+          Personalizza PANAIA per questa community
+        </strong>
+
+        <p>
+          Le regole attive verranno utilizzate dal sistema
+          per specializzare il comportamento dell'intelligenza
+          artificiale all'interno di questa community.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- RULES -->
+
+    <div class="rules-header">
+
+      <div>
+
+        <span class="section-kicker">
+          REGOLE AI
+        </span>
+
+        <h3>
+          Regole della community
+        </h3>
+
+      </div>
+
+      <span class="rules-counter">
+        {{ rules.length }} regole
+      </span>
+
+    </div>
+
+
+    <div class="rules-list">
+
+      <div
+        *ngFor="let rule of rules"
+        class="rule-card"
+        [class.disabled]="!rule.enabled"
+      >
+
+        <div class="rule-number">
+          {{ rule.priority }}
+        </div>
+
+        <div class="rule-content">
+
+          <strong>
+            {{ rule.name }}
+          </strong>
+
+          <p>
+            {{ rule.description }}
+          </p>
+
+        </div>
+
+        <button
+          class="toggle"
+          [class.active]="rule.enabled"
+          [disabled]="selectedCommunity.role !== 'ADMIN'"
+          (click)="toggleRule(rule)"
+        >
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ADD RULE -->
+
+    <div
+      *ngIf="selectedCommunity.role === 'ADMIN'"
+      class="add-rule"
+    >
+
+      <div class="add-rule-header">
+
+        <div>
+          <span class="add-icon">
+            +
+          </span>
+
+          <div>
+            <strong>
+              Aggiungi una regola
+            </strong>
+
+            <p>
+              Definisci un nuovo comportamento per PANAIA.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Nome della regola
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="newRuleName"
+          placeholder="Es. PANAIA deve favorire risposte tecniche"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Descrizione
+        </label>
+
+        <textarea
+          [(ngModel)]="newRuleDescription"
+          placeholder="Descrivi come deve comportarsi PANAIA..."
+          rows="4"
+        ></textarea>
+
+      </div>
+
+
+      <button
+        class="primary-button"
+        (click)="addRule()"
+      >
+        Aggiungi regola
+      </button>
+
+    </div>
+
+
+    <!-- MEMBER VIEW -->
+
+    <div
+      *ngIf="selectedCommunity.role !== 'ADMIN'"
+      class="member-banner"
+    >
+
+      <span>
+        👥
+      </span>
+
+      <div>
+
+        <strong>
+          Sei membro di questa community
+        </strong>
+
+        <p>
+          Solo gli amministratori possono modificare
+          le regole che definiscono il comportamento di PANAIA.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

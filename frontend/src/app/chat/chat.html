@@ -1,75 +1,258 @@
-<main class="chat-container">
-  <header class="chat-header">
-    <div class="chat-title">
-      <div class="ai-icon" aria-hidden="true">✦</div>
-      <div>
-        <h1>DevOps Assistant</h1>
-        <div class="status"><span class="status-dot"></span>Online e pronto ad aiutarti</div>
+<main class="panaia-shell">
+
+  <!-- HEADER -->
+  <header class="panaia-header">
+
+    <div class="brand">
+      <div class="brand-mark">
+        ✦
+      </div>
+
+      <div class="brand-info">
+        <h1>PANAIA</h1>
+        <span>Personal AI Native Assistant</span>
       </div>
     </div>
-    <span class="model-label">OLLAMA / AI</span>
+
+    <div class="header-status">
+      <span class="status-dot"></span>
+      <span>Online</span>
+    </div>
+
   </header>
 
-  <section class="messages-container" aria-live="polite">
-    <div class="welcome-panel" *ngIf="messages.length === 0">
-      <span class="welcome-kicker">CONVERSAZIONE NUOVA</span>
-      <h2>Su cosa lavoriamo oggi?</h2>
-      <p>Chiedimi di analizzare un progetto, diagnosticare una pipeline o migliorare il tuo workflow.</p>
-      <div class="suggestions" aria-label="Suggerimenti">
-        <span>Analizza la pipeline CI/CD</span>
-        <span>Trova un errore nel deploy</span>
-        <span>Spiega questo log</span>
-      </div>
-    </div>
 
+  <!-- CONVERSATION -->
+  <section class="conversation">
+
+    <!-- WELCOME -->
     <div
-      *ngFor="let chatMessage of messages"
-      class="message-row"
-      [class.user-message]="chatMessage.role === 'user'"
-      [class.assistant-message]="chatMessage.role === 'assistant'"
+      class="welcome"
+      *ngIf="messages.length === 0"
     >
-      <div class="message-avatar" aria-hidden="true">
-        {{ chatMessage.role === 'user' ? 'TU' : '✦' }}
+
+      <div class="welcome-badge">
+        <span>✦</span>
+        PANAIA
       </div>
-      <div class="message-content">
-        <span class="message-author">{{ chatMessage.role === 'user' ? 'Tu' : 'Assistant' }}</span>
-        <div class="message-bubble">{{ chatMessage.content }}</div>
-        <span class="message-time">{{ chatMessage.timestamp | date:'HH:mm' }}</span>
+
+      <h2>
+        Un'intelligenza artificiale
+        <span>costruita per aiutarti.</span>
+      </h2>
+
+      <p class="welcome-description">
+        PANAIA è un agente AI generalista progettato per comprendere
+        le tue domande, ragionare sui problemi, aiutarti a trovare
+        soluzioni e seguire le regole definite dalla propria community.
+      </p>
+
+
+      <!-- PURPOSE -->
+      <div class="purpose-grid">
+
+        <div class="purpose-card">
+          <div class="purpose-icon">💬</div>
+          <div>
+            <strong>Rispondere</strong>
+            <p>
+              Risponde alle tue domande e ti aiuta a comprendere
+              argomenti complessi.
+            </p>
+          </div>
+        </div>
+
+        <div class="purpose-card">
+          <div class="purpose-icon">🧠</div>
+          <div>
+            <strong>Ragionare</strong>
+            <p>
+              Analizza problemi, confronta informazioni e costruisce
+              risposte ragionate.
+            </p>
+          </div>
+        </div>
+
+        <div class="purpose-card">
+          <div class="purpose-icon">📚</div>
+          <div>
+            <strong>Conoscere</strong>
+            <p>
+              Utilizza la conoscenza e le regole rese disponibili
+              attraverso il sistema e la community.
+            </p>
+          </div>
+        </div>
+
+        <div class="purpose-card">
+          <div class="purpose-icon">🤝</div>
+          <div>
+            <strong>Collaborare</strong>
+            <p>
+              È pensato come un assistente con cui collaborare,
+              non come un semplice motore di ricerca.
+            </p>
+          </div>
+        </div>
+
       </div>
+
+
+      <!-- QUICK ACTIONS -->
+      <div class="quick-actions">
+
+        <span class="quick-label">
+          INIZIA UNA CONVERSAZIONE
+        </span>
+
+        <div class="suggestions">
+
+          <button
+            type="button"
+            (click)="message = 'Spiegami come funziona PANAIA'"
+          >
+            <span>✦</span>
+            Cosa puoi fare?
+          </button>
+
+          <button
+            type="button"
+            (click)="message = 'Aiutami a risolvere un problema'"
+          >
+            <span>🧩</span>
+            Risolvi un problema
+          </button>
+
+          <button
+            type="button"
+            (click)="message = 'Spiegami un argomento complesso in modo semplice'"
+          >
+            <span>💡</span>
+            Spiegami qualcosa
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <div *ngIf="loading" class="message-row assistant-message">
-      <div class="message-avatar" aria-hidden="true">✦</div>
-      <div class="message-content">
-        <span class="message-author">Assistant</span>
-        <div class="message-bubble loading-bubble" aria-label="L'assistant sta elaborando">
-          <span></span><span></span><span></span>
+
+    <!-- MESSAGES -->
+    <div class="messages">
+
+      <div
+        *ngFor="let chatMessage of messages"
+        class="message-row"
+        [class.user-message]="chatMessage.role === 'user'"
+        [class.assistant-message]="chatMessage.role === 'assistant'"
+      >
+
+        <div class="message-avatar">
+
+          <ng-container *ngIf="chatMessage.role === 'assistant'">
+            ✦
+          </ng-container>
+
+          <ng-container *ngIf="chatMessage.role === 'user'">
+            TU
+          </ng-container>
+
         </div>
+
+
+        <div class="message-content">
+
+          <div class="message-meta">
+            <span class="message-author">
+              {{ chatMessage.role === 'user' ? 'Tu' : 'PANAIA' }}
+            </span>
+
+            <span class="message-time">
+              {{ chatMessage.timestamp | date:'HH:mm' }}
+            </span>
+          </div>
+
+          <div class="message-bubble">
+            {{ chatMessage.content }}
+          </div>
+
+        </div>
+
       </div>
+
+
+      <!-- LOADING -->
+      <div
+        *ngIf="loading"
+        class="message-row assistant-message"
+      >
+
+        <div class="message-avatar">
+          ✦
+        </div>
+
+        <div class="message-content">
+
+          <div class="message-meta">
+            <span class="message-author">
+              PANAIA
+            </span>
+          </div>
+
+          <div class="message-bubble loading-bubble">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
+
   </section>
 
-  <footer class="chat-input-area">
-    <div class="input-container">
+
+  <!-- INPUT -->
+  <footer class="composer-area">
+
+    <div class="composer">
+
       <input
         type="text"
         [(ngModel)]="message"
         (keyup.enter)="sendMessage()"
-        placeholder="Scrivi un messaggio..."
+        placeholder="Chiedi qualcosa a PANAIA..."
         aria-label="Messaggio"
         [disabled]="loading"
       />
+
       <button
-        class="send-button"
         type="button"
+        class="send-button"
         (click)="sendMessage()"
         [disabled]="loading || !message.trim()"
         aria-label="Invia messaggio"
-        title="Invia messaggio"
       >
         ↑
       </button>
+
     </div>
-    <p class="input-hint">Invio per spedire · Le risposte possono contenere errori</p>
+
+    <div class="composer-footer">
+      <span>
+        PANAIA può commettere errori. Verifica le informazioni importanti.
+      </span>
+
+      <span>
+        AI · OLLAMA
+      </span>
+    </div>
+
   </footer>
+
 </main>

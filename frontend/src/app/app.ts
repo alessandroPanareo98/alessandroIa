@@ -1,10 +1,76 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+
 import { ChatComponent } from './chat/chat';
+import { CommunityComponent } from './community/community';
+import { RulesComponent } from './rules/rules';
+type Section =
+  | 'home'
+  | 'chat'
+  | 'communities'
+  | 'knowledge'
+  | 'rules'
+  | 'settings';
 
 @Component({
   selector: 'app-root',
-  imports: [ChatComponent],
+  imports: [
+    CommonModule,
+    ChatComponent,
+    CommunityComponent,
+    RulesComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {}
+export class App {
+
+  activeSection: Section = 'home';
+
+  sidebarCollapsed = false;
+
+  sectionTitle = 'Benvenuto in PANAIA';
+  sectionLabel = 'HOME';
+
+  toggleSidebar(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  navigate(section: Section): void {
+
+    this.activeSection = section;
+
+    switch (section) {
+
+      case 'home':
+        this.sectionLabel = 'HOME';
+        this.sectionTitle = 'Benvenuto in PANAIA';
+        break;
+
+      case 'chat':
+        this.sectionLabel = 'PANAIA AI';
+        this.sectionTitle = 'Chat';
+        break;
+
+      case 'communities':
+        this.sectionLabel = 'COMMUNITY';
+        this.sectionTitle = 'Le community';
+        break;
+
+      case 'knowledge':
+        this.sectionLabel = 'KNOWLEDGE';
+        this.sectionTitle = 'Base di conoscenza';
+        break;
+
+      case 'rules':
+        this.sectionLabel = 'PANAIA AI';
+        this.sectionTitle = 'Regole della community';
+        break;
+
+      case 'settings':
+        this.sectionLabel = 'CONFIGURAZIONE';
+        this.sectionTitle = 'Impostazioni';
+        break;
+    }
+  }
+}
