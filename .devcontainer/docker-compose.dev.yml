@@ -22,8 +22,8 @@ services:
       JWT_SECRET: 1234567890123456789012345678901234567890
 
       AI_BASE_URL: http://ollama:11434
-      AI_GENERATE_PATH: /v1/chat/completions
-      AI_MODEL: qwen3
+      AI_GENERATE_PATH: /api/chat
+      AI_MODEL: llama3.2
 
       GITLAB_URL: https://gitlab.com
       GITLAB_TOKEN: ""
@@ -104,6 +104,8 @@ services:
   ollama:
     image: ollama/ollama:latest
     restart: unless-stopped
+    ports:
+      - "11434:11434"
 
     volumes:
       - ollama-data:/root/.ollama

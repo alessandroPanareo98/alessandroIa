@@ -17,6 +17,9 @@
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/auth/UserRole.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/auth/UserSetting.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/auth/UserSettingRepository.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/chat/ChatController.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/chat/ChatRequest.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/chat/ChatResponse.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/common/ApiExceptionHandler.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/config/AppProperties.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/config/ApplicationConfig.java

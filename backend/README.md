@@ -43,3 +43,17 @@ Backend Spring Boot 3 per ricezione webhook GitLab, gestione pipeline/errori, an
 - Layer Controller -> Service -> Repository
 - Integrazione AI via servizio esterno HTTP compatibile OpenAI
 - Persistenza con migrazioni Flyway
+
+
+
+## INSTALL MODEL 
+docker exec -it alessandroia_devcontainer-ollama-1 ollama pull llama3.2
+
+Aspetta che termini il download, poi:
+
+docker exec -it alessandroia_devcontainer-ollama-1 ollama list
+
+
+TEST 
+
+$ docker exec -it alessandroia_devcontainer-ollama-1 ollama run llama3.2 "Ciao, rispondi con una frase"

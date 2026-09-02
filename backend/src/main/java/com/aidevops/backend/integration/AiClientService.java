@@ -34,6 +34,7 @@ public class AiClientService {
                         Map.of("role", "system", "content", "Sei un assistente DevOps. Rispondi in JSON con campi severity, cause, solution, confidence."),
                         Map.of("role", "user", "content", prompt)
                 ),
+                "stream", false,
                 "temperature", 0.2
         );
 
@@ -55,6 +56,7 @@ public class AiClientService {
                         Map.of("role", "system", "content", "Sei un assistente DevOps. Rispondi in italiano in modo chiaro e pratico."),
                         Map.of("role", "user", "content", message)
                 ),
+                "stream", false,
                 "temperature", 0.2
         );
 
@@ -66,13 +68,9 @@ public class AiClientService {
                 .retrieve()
                 .body(String.class);
 
-        try {
-            JsonNode content = objectMapper.readTree(raw).path("choices").path(0).path("message").path("content");
-            if (!content.isMissingNode() && !content.asText().isBlank()) {
-                return content.asText();
-            }
-        } catch (Exception ignored) {
-            // Restituisce un messaggio controllato al posto del JSON grezzo del provider.
+        String extracted = extractContent(raw);
+        if (extracted != null && !extracted.isBlank()) {
+            return extracted;
         }
 
         return "Non sono riuscito a interpretare la risposta del modello.";
@@ -86,12 +84,32 @@ public class AiClientService {
                 "Analizza: causa, priorita, soluzione, confidence.";
     }
 
+    private String extractContent(String raw) {
+        try {
+            JsonNode root = objectMapper.readTree(raw);
+
+            JsonNode messageContent = root.path("message").path("content");
+            if (!messageContent.isMissingNode() && !messageContent.asText().isBlank()) {
+                return messageContent.asText();
+            }
+
+            JsonNode choicesContent = root.path("choices").path(0).path("message").path("content");
+            if (!choicesContent.isMissingNode() && !choicesContent.asText().isBlank()) {
+                return choicesContent.asText();
+            }
+        } catch (Exception ignored) {
+            // Ignored: fallback below.
+        }
+
+        return null;
+    }
+
     private AiGenerateResponse parseResponse(String raw) {
         try {
             JsonNode root = objectMapper.readTree(raw);
-            JsonNode messageContent = root.path("choices").path(0).path("message").path("content");
-            if (!messageContent.isMissingNode()) {
-                JsonNode parsed = objectMapper.readTree(messageContent.asText());
+            String content = extractContent(raw);
+            if (content != null && !content.isBlank()) {
+                JsonNode parsed = objectMapper.readTree(content);
                 return new AiGenerateResponse(
                         parsed.path("severity").asText("MEDIUM"),
                         parsed.path("cause").asText("N/A"),
