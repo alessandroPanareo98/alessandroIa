@@ -57,3 +57,10 @@ docker exec -it alessandroia_devcontainer-ollama-1 ollama list
 TEST 
 
 $ docker exec -it alessandroia_devcontainer-ollama-1 ollama run llama3.2 "Ciao, rispondi con una frase"
+
+
+---PROD
+docker exec -it alessandroia-ollama-1 ollama pull llama3.2
+
+
+docker exec -it alessandroia-ollama-1 ollama list

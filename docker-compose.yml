@@ -1,0 +1,94 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: aidevops_dev
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U postgres -d aidevops_dev"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - panaia-network
+
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+
+    volumes:
+      - ollama-data:/root/.ollama
+
+    networks:
+      - panaia-network
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+
+    restart: unless-stopped
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_URL: jdbc:postgresql://postgres:5432/aidevops_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      AI_BASE_URL: http://ollama:11434
+      AI_GENERATE_PATH: /api/chat
+      AI_MODEL: llama3.2
+      GITLAB_URL: https://gitlab.com
+      GITLAB_TOKEN: ${GITLAB_TOKEN}
+      GITLAB_WEBHOOK_TOKEN: ${GITLAB_WEBHOOK_TOKEN}
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - panaia-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+
+    ports:
+      - "80:80"
+
+    depends_on:
+      - backend
+
+    networks:
+      - panaia-network
+
+
+networks:
+  panaia-network:
+    driver: bridge
+
+
+volumes:
+  postgres-data:
+  ollama-data:
