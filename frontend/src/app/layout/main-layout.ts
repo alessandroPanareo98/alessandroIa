@@ -8,10 +8,12 @@ import { ChatComponent } from '../chat/chat';
 import { CommunityComponent } from '../community/community';
 import { FooterComponent } from '../footer/footer';
 import { HeaderComponent } from '../header/header';
+import { NewsComponent } from '../news/news';
 import { RulesComponent } from '../rules/rules';
 type Section =
   | 'home'
   | 'chat'
+  | 'news'
   | 'communities'
   | 'knowledge'
   | 'rules'
@@ -26,6 +28,7 @@ type Section =
     CommunityComponent,
     FooterComponent,
     HeaderComponent,
+    NewsComponent,
     RulesComponent
   ],
   templateUrl: './main-layout.html',
@@ -65,6 +68,11 @@ export class MainLayoutComponent {
       case 'chat':
         this.sectionLabel = 'PANAIA AI';
         this.sectionTitle = 'Chat';
+        break;
+
+      case 'news':
+        this.sectionLabel = 'PANAIA AI';
+        this.sectionTitle = 'News del giorno';
         break;
 
       case 'communities':

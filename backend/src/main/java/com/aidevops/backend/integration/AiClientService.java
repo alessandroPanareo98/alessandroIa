@@ -10,6 +10,7 @@ import org.springframework.web.client.RestClient;
 
 import com.aidevops.backend.analysis.AiGenerateResponse;
 import com.aidevops.backend.config.AppProperties;
+import com.aidevops.backend.news.NewsDraft;
 import com.aidevops.backend.service.AiSettingService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -92,6 +93,46 @@ public class AiClientService {
         }
 
         return "Non sono riuscito a interpretare la risposta del modello.";
+    }
+
+    public NewsDraft generateDailyNews() {
+        Map<String, Object> payload = Map.of(
+                "model", appProperties.ai().model(),
+                "messages", List.of(
+                        Map.of("role", "system", "content", "Sei un redattore tecnico. Rispondi esclusivamente con JSON valido con i campi title, summary, content e source. Scrivi in italiano. Non inventare fatti, date, aziende o citazioni: crea un approfondimento editoriale originale su IA, DevOps e sviluppo software, dichiarandolo come contenuto generato da PANAIA."),
+                        Map.of("role", "user", "content", "Genera la news editoriale del giorno con titolo, sintesi di massimo 300 caratteri, contenuto di 2-4 paragrafi e source uguale a PANAIA AI.")
+                ),
+                "stream", false,
+                "temperature", 0.4
+        );
+
+        String endpoint = appProperties.ai().baseUrl() + appProperties.ai().generatePath();
+        String raw = restClient.post()
+                .uri(endpoint)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(payload)
+                .retrieve()
+                .body(String.class);
+
+        try {
+            JsonNode parsed = objectMapper.readTree(extractContent(raw));
+            return new NewsDraft(
+                    required(parsed, "title"),
+                    required(parsed, "summary"),
+                    required(parsed, "content"),
+                    required(parsed, "source")
+            );
+        } catch (Exception exception) {
+            throw new IllegalStateException("La risposta IA per la news non è un JSON valido", exception);
+        }
+    }
+
+    private String required(JsonNode node, String field) {
+        String value = node.path(field).asText("").trim();
+        if (value.isBlank()) {
+            throw new IllegalStateException("Campo IA mancante: " + field);
+        }
+        return value;
     }
 
     private String buildPrompt(String pipelineName, String errorTitle, String commitMessage, String logText) {

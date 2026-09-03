@@ -36,6 +36,15 @@
 
     <button
       class="nav-item"
+      [class.active]="activeSection === 'news'"
+      (click)="navigate('news')"
+    >
+      <span class="nav-icon">▥</span>
+      <span>News</span>
+    </button>
+
+    <button
+      class="nav-item"
       [class.active]="activeSection === 'communities'"
       (click)="navigate('communities')"
     >

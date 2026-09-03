@@ -4,6 +4,7 @@
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/analysis/AiAnalysisRepository.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/analysis/AiAnalysisService.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/analysis/AiGenerateResponse.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/auth/AiSetting.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/auth/AppUserDetailsService.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/auth/AuthController.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/auth/AuthResponse.java
@@ -32,6 +33,12 @@
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/error/Severity.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/integration/AiClientService.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/integration/GitLabService.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/news/NewsArticle.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/news/NewsArticleRepository.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/news/NewsController.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/news/NewsDraft.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/news/NewsScheduler.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/news/NewsService.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/notification/Notification.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/notification/NotificationChannel.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/notification/NotificationController.java
@@ -48,5 +55,7 @@
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/project/ProjectController.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/project/ProjectRepository.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/project/ProjectService.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/repository/AiSettingRepository.java
+/workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/service/AiSettingService.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/webhook/WebhookController.java
 /workspaces/SoftwareAi/backend/src/main/java/com/aidevops/backend/webhook/WebhookService.java

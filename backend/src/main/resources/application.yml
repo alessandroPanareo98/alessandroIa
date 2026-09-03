@@ -28,12 +28,14 @@ logging:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:+kwbwa+nGOD88wzJo5r9FfldPtoGT6OVdP5/ziOhvDjfy6cy8D+pwc+syjjg2Erm}
+    secret: ${JWT_SECRET:k9A6x795HiJHrV0Wow3Z+N/4ZFCZa9p842f0qAkisP0=}
     expiration-minutes: ${JWT_EXP_MIN:120}
   ai:
     base-url: ${AI_BASE_URL:http://ollama:11434}
     generate-path: ${AI_GENERATE_PATH:/api/chat}
     model: ${AI_MODEL:llama3.2}
+  news:
+    cron: ${NEWS_CRON:0 0 7 * * *}
   gitlab:
     base-url: ${GITLAB_URL:https://gitlab.com}
     token: ${GITLAB_TOKEN:}

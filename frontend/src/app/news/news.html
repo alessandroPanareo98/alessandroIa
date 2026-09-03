@@ -1,0 +1,33 @@
+<section class="news-page" aria-live="polite">
+	<div class="news-intro">
+		<div>
+			<span class="news-eyebrow">AGGIORNAMENTO GIORNALIERO</span>
+			<h2>Il segnale tecnico di oggi</h2>
+			<p>Una selezione editoriale generata da PANAIA su IA, DevOps e sviluppo software.</p>
+		</div>
+		<button class="refresh-button" type="button" title="Aggiorna news" (click)="loadNews()" [disabled]="loading">
+			↻ Aggiorna
+		</button>
+	</div>
+
+	<div *ngIf="loading" class="news-state">Caricamento delle news...</div>
+	<div *ngIf="error" class="news-state error-state">
+		Impossibile raggiungere il servizio news.
+		<button type="button" (click)="loadNews()">Riprova</button>
+	</div>
+	<div *ngIf="!loading && !error && articles.length === 0" class="news-state">
+		La prima news giornaliera non è ancora stata pubblicata.
+	</div>
+
+	<div *ngIf="!loading && !error" class="news-grid">
+		<article *ngFor="let article of articles; let first = first" class="news-card" [class.featured]="first">
+			<div class="news-meta">
+				<span>{{ article.source }}</span>
+				<time [attr.datetime]="article.publishedOn">{{ article.publishedOn | date:'dd MMM yyyy' }}</time>
+			</div>
+			<h3>{{ article.title }}</h3>
+			<p class="news-summary">{{ article.summary }}</p>
+			<p class="news-content">{{ article.content }}</p>
+		</article>
+	</div>
+</section>

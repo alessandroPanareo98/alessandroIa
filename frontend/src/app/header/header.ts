@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export type AppSection =
   | 'home'
   | 'chat'
+  | 'news'
   | 'communities'
   | 'knowledge'
   | 'rules'
