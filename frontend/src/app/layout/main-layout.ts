@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 import { ChatComponent } from '../chat/chat';
 import { CommunityComponent } from '../community/community';
 import { FooterComponent } from '../footer/footer';
 import { HeaderComponent } from '../header/header';
 import { RulesComponent } from '../rules/rules';
-
 type Section =
   | 'home'
   | 'chat'
@@ -31,6 +33,8 @@ type Section =
 })
 export class MainLayoutComponent {
 
+  private authService = inject(AuthService);
+  private router = inject(Router);
   activeSection: Section = 'home';
 
   sidebarCollapsed = false;
@@ -40,6 +44,11 @@ export class MainLayoutComponent {
 
   toggleSidebar(): void {
     this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   navigate(section: Section): void {
