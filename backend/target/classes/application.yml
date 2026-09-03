@@ -21,11 +21,14 @@ server:
 logging:
   level:
     root: INFO
-    com.aidevops.backend: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate: INFO
+    com.aidevops.backend: DEBUG
 
 app:
   jwt:
-    secret: ${JWT_SECRET:replace-with-very-long-secret-key-at-least-32-chars}
+    secret: ${JWT_SECRET:+kwbwa+nGOD88wzJo5r9FfldPtoGT6OVdP5/ziOhvDjfy6cy8D+pwc+syjjg2Erm}
     expiration-minutes: ${JWT_EXP_MIN:120}
   ai:
     base-url: ${AI_BASE_URL:http://ollama:11434}

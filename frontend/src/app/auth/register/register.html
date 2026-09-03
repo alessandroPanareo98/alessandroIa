@@ -1,0 +1,147 @@
+<div class="register-page">
+
+  <div class="register-content">
+
+```
+<!-- iAGORA -->
+<div class="brand">
+  <div class="brand-icon">i</div>
+  <span>Agora</span>
+</div>
+
+<div class="intro">
+
+  <div class="badge">
+    ✦ INTELLIGENZA ARTIFICIALE
+  </div>
+
+  <h1>
+    Il tuo spazio per
+    <span>l'AI.</span>
+  </h1>
+
+  <p>
+    iAgora riunisce intelligenza artificiale, informazioni
+    e strumenti in un unico ambiente per aiutarti a trovare
+    risposte, comprendere contenuti e sviluppare le tue idee.
+  </p>
+
+</div>
+
+
+<!-- REGISTRAZIONE -->
+<div class="register-card">
+
+  <div class="card-header">
+
+    <h2>Crea il tuo account</h2>
+
+    <p>
+      Registrati gratuitamente e inizia a utilizzare iAgora.
+    </p>
+
+  </div>
+
+
+  <form (ngSubmit)="register()">
+
+    <div class="form-group">
+
+      <label for="fullName">
+        Nome completo
+      </label>
+
+      <input
+        id="fullName"
+        type="text"
+        name="fullName"
+        [(ngModel)]="fullName"
+        placeholder="Nome e cognome"
+        autocomplete="name"
+        required>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="email">
+        Email
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="La tua email"
+        autocomplete="email"
+        required>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="password">
+        Password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Almeno 8 caratteri"
+        autocomplete="new-password"
+        required>
+
+    </div>
+
+
+    @if (error) {
+
+      <div class="error">
+        {{ error }}
+      </div>
+
+    }
+
+
+    <button
+      type="submit"
+      [disabled]="loading">
+
+      @if (loading) {
+        Creazione account...
+      } @else {
+        <span>Crea account</span>
+        <span class="arrow">→</span>
+      }
+
+    </button>
+
+  </form>
+
+
+  <div class="login-link">
+
+    Hai già un account?
+
+    <a routerLink="/login">
+      Accedi
+    </a>
+
+  </div>
+
+</div>
+
+
+<div class="footer-text">
+  iAgora · AI · Knowledge · Context
+</div>
+```
+
+  </div>
+
+</div>

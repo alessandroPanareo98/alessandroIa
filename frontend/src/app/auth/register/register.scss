@@ -1,0 +1,427 @@
+:host {
+display: block;
+min-height: 100vh;
+}
+
+.register-page {
+min-height: 100vh;
+width: 100%;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 30px 20px;
+
+position: relative;
+overflow: hidden;
+
+background: #090a0c;
+color: #ffffff;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+}
+
+/* Luce arancione sullo sfondo */
+
+.register-page::before {
+content: "";
+
+position: absolute;
+
+width: 500px;
+height: 500px;
+
+top: 50%;
+left: 50%;
+
+transform: translate(-50%, -55%);
+
+border-radius: 50%;
+
+background: rgba(255, 100, 0, 0.09);
+
+filter: blur(120px);
+
+pointer-events: none;
+}
+
+/* =========================================
+CONTENUTO CENTRALE
+========================================= */
+
+.register-content {
+width: 100%;
+max-width: 480px;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+
+position: relative;
+z-index: 1;
+}
+
+/* =========================================
+LOGO
+========================================= */
+
+.brand {
+display: flex;
+align-items: center;
+gap: 9px;
+
+margin-bottom: 24px;
+
+font-size: 25px;
+font-weight: 750;
+letter-spacing: -1px;
+}
+
+.brand-icon {
+width: 37px;
+height: 37px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+border-radius: 10px;
+
+background: linear-gradient(
+135deg,
+#ffad62,
+#ff6900
+);
+
+font-size: 21px;
+font-weight: 800;
+
+box-shadow:
+0 8px 25px rgba(255, 105, 0, 0.22);
+}
+
+/* =========================================
+INTRO
+========================================= */
+
+.intro {
+width: 100%;
+
+text-align: center;
+
+margin-bottom: 25px;
+}
+
+.badge {
+display: inline-block;
+
+margin-bottom: 12px;
+
+color: #ff8735;
+
+font-size: 9px;
+font-weight: 800;
+
+letter-spacing: 1.5px;
+}
+
+.intro h1 {
+margin: 0;
+
+font-size: 36px;
+
+line-height: 1.1;
+
+letter-spacing: -1.8px;
+
+font-weight: 750;
+}
+
+.intro h1 span {
+color: #ff7825;
+}
+
+.intro p {
+max-width: 450px;
+
+margin: 13px auto 0;
+
+color: #777c86;
+
+font-size: 12px;
+
+line-height: 1.6;
+}
+
+/* =========================================
+REGISTER CARD
+========================================= */
+
+.register-card {
+width: 100%;
+
+padding: 28px;
+
+border: 1px solid rgba(255, 255, 255, 0.07);
+
+border-radius: 18px;
+
+background:
+rgba(17, 18, 22, 0.94);
+
+box-shadow:
+0 25px 70px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================
+HEADER
+========================================= */
+
+.card-header {
+margin-bottom: 22px;
+}
+
+.card-header h2 {
+margin: 0 0 7px;
+
+font-size: 20px;
+
+letter-spacing: -0.7px;
+
+font-weight: 700;
+}
+
+.card-header p {
+margin: 0;
+
+color: #696e77;
+
+font-size: 11px;
+
+line-height: 1.5;
+}
+
+/* =========================================
+FORM
+========================================= */
+
+form {
+display: flex;
+flex-direction: column;
+
+gap: 15px;
+}
+
+.form-group {
+display: flex;
+flex-direction: column;
+
+gap: 7px;
+}
+
+.form-group label {
+color: #bfc2c8;
+
+font-size: 10px;
+font-weight: 600;
+}
+
+.form-group input {
+width: 100%;
+height: 47px;
+
+padding: 0 13px;
+
+border: 1px solid #272a30;
+
+border-radius: 9px;
+
+outline: none;
+
+background: #0d0f12;
+
+color: #ffffff;
+
+font-size: 12px;
+
+transition:
+border-color 0.2s ease,
+box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+color: #4b5058;
+}
+
+.form-group input:hover {
+border-color: #353941;
+}
+
+.form-group input:focus {
+border-color: #ff7622;
+
+box-shadow:
+0 0 0 3px rgba(255, 118, 34, 0.07);
+}
+
+/* =========================================
+ERROR
+========================================= */
+
+.error {
+padding: 10px 12px;
+
+border: 1px solid rgba(255, 70, 70, 0.2);
+
+border-radius: 8px;
+
+background: rgba(255, 60, 60, 0.06);
+
+color: #ff8585;
+
+font-size: 10px;
+
+line-height: 1.4;
+}
+
+/* =========================================
+BUTTON
+========================================= */
+
+form button {
+width: 100%;
+height: 48px;
+
+margin-top: 3px;
+
+border: none;
+
+border-radius: 9px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+gap: 10px;
+
+background:
+linear-gradient(
+135deg,
+#ff9b4a,
+#f46b10
+);
+
+color: #ffffff;
+
+font-size: 12px;
+font-weight: 700;
+
+cursor: pointer;
+
+box-shadow:
+0 8px 25px rgba(244, 107, 16, 0.16);
+
+transition:
+transform 0.2s ease,
+box-shadow 0.2s ease,
+opacity 0.2s ease;
+}
+
+form button:hover:not(:disabled) {
+transform: translateY(-1px);
+
+box-shadow:
+0 12px 30px rgba(244, 107, 16, 0.25);
+}
+
+form button:disabled {
+opacity: 0.6;
+
+cursor: not-allowed;
+}
+
+.arrow {
+font-size: 17px;
+}
+
+/* =========================================
+LOGIN
+========================================= */
+
+.login-link {
+margin-top: 20px;
+
+text-align: center;
+
+color: #686d76;
+
+font-size: 11px;
+}
+
+.login-link a {
+margin-left: 4px;
+
+color: #ff8130;
+
+font-weight: 700;
+
+text-decoration: none;
+}
+
+.login-link a:hover {
+color: #ffa05e;
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+.footer-text {
+margin-top: 20px;
+
+color: #393d44;
+
+font-size: 8px;
+
+font-weight: 600;
+
+letter-spacing: 1.3px;
+
+text-transform: uppercase;
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+
+.register-page {
+padding: 20px 15px;
+}
+
+.register-content {
+max-width: 400px;
+}
+
+.brand {
+margin-bottom: 20px;
+}
+
+.intro h1 {
+font-size: 31px;
+}
+
+.intro p {
+font-size: 11px;
+}
+
+.register-card {
+padding: 23px 20px;
+border-radius: 15px;
+}
+}
