@@ -61,7 +61,9 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(java.util.List.of(
             "http://localhost",
             "http://localhost:80",
-            "http://localhost:4200"
+            "http://localhost:4200",
+            "https://iagora.it",
+            "https://www.iagora.it"
         ));
         configuration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(java.util.List.of("Authorization", "Content-Type"));
