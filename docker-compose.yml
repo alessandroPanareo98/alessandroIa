@@ -67,26 +67,26 @@ services:
     networks:
       - panaia-network
 
-    frontend:
-      build:
-        context: ./frontend
-        dockerfile: Dockerfile
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
 
-      restart: unless-stopped
+    restart: unless-stopped
 
-      ports:
-        - "80:80"
-        - "443:443"
+    ports:
+      - "80:80"
+      - "443:443"
 
-      volumes:
-        - ./certbot/www:/var/www/certbot
-        - /etc/letsencrypt:/etc/letsencrypt:ro
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - /etc/letsencrypt:/etc/letsencrypt:ro
 
-      depends_on:
-        - backend
+    depends_on:
+      - backend
 
-      networks:
-        - panaia-network
+    networks:
+      - panaia-network
 
 
 networks:
