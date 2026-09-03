@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/actuator/health"
                         ).permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
@@ -55,23 +56,38 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(java.util.List.of(
-            "http://localhost",
-            "http://localhost:80",
-            "http://localhost:4200",
-            "https://iagora.it",
-            "https://www.iagora.it"
-        ));
-        configuration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(java.util.List.of("Authorization", "Content-Type"));
+@Bean
+public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+    configuration.setAllowedOriginPatterns(java.util.List.of(
+        "http://localhost",
+        "http://localhost:*",
+        "https://iagora.it",
+        "https://www.iagora.it"
+    ));
+
+    configuration.setAllowedMethods(java.util.List.of(
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+    ));
+
+    configuration.setAllowedHeaders(java.util.List.of(
+        "*"
+    ));
+
+    configuration.setAllowCredentials(true);
+
+    UrlBasedCorsConfigurationSource source =
+        new UrlBasedCorsConfigurationSource();
+
+    source.registerCorsConfiguration("/**", configuration);
+
+    return source;
+}
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
